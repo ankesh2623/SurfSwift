@@ -1,12 +1,16 @@
-package com.example.surfswift
+package com.example.surfswift.fragment
 
 import android.os.Bundle
-import android.text.SpannableStringBuilder
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.recyclerview.widget.GridLayoutManager
+import com.example.surfswift.model.Bookmark
+import com.example.surfswift.adapter.BookmarkAdapter
+import com.example.surfswift.activity.MainActivity
+import com.example.surfswift.R
 import com.example.surfswift.databinding.FragmentHomeBinding
 import com.google.android.material.snackbar.Snackbar
 
@@ -36,7 +40,7 @@ class HomeFragment : Fragment() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(url: String?): Boolean {
                 if(mainActivityRef.checkForInternet(requireContext()))
-                    mainActivityRef.changeTab(url!!,BrowseFragment(url)) // the main activity is required here and in that changeTab function is called which has parameters url string and the fragment
+                    mainActivityRef.changeTab(url!!, BrowseFragment(url)) // the main activity is required here and in that changeTab function is called which has parameters url string and the fragment
                 // the browse fragment is created as a constructor which accepts the url and that url is passed to loadUrl which will be opened
 
                 else
@@ -50,12 +54,21 @@ class HomeFragment : Fragment() {
         mainActivityRef.binding.goBtn.setOnClickListener{
             if(mainActivityRef.checkForInternet(requireContext()))
                 mainActivityRef.changeTab(mainActivityRef.binding.topSearchBar.text.toString(),
-                    BrowseFragment(mainActivityRef.binding.topSearchBar.text.toString())) // the main activity is required here and in that changeTab function is called which has parameters url string and the fragment
+                    BrowseFragment(mainActivityRef.binding.topSearchBar.text.toString())
+                ) // the main activity is required here and in that changeTab function is called which has parameters url string and the fragment
             // the browse fragment is created as a constructor which accepts the url and that url is passed to loadUrl which will be opened
 
             else
                 Snackbar.make(binding.root,"Internet Not Connected 😕",300).show()
         }
+
+
+
+        binding.recyclerView.setHasFixedSize(true)
+        binding.recyclerView.setItemViewCacheSize(5)
+        binding.recyclerView.layoutManager = GridLayoutManager(requireContext(),5)
+        binding.recyclerView.adapter = BookmarkAdapter(requireContext())
+
 
 
     }

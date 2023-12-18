@@ -17,7 +17,7 @@
         android:theme="@style/Theme.SurfSwift"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:configChanges="uiMode|keyboardHidden|screenSize|screenLayout|smallestScreenSize|orientation"
             android:exported="true">
             <intent-filter>
