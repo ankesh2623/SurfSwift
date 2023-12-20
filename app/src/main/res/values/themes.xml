@@ -13,4 +13,18 @@
     </style>
 
     <style name="Theme.SurfSwift" parent="Base.Theme.SurfSwift" />
+
+
+    //--------------------------------------------------------------------------------//
+    <style name="roundCornerDialog" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <item name="shapeAppearanceOverlay">
+            @style/shape
+        </item>
+    </style>
+
+    <style name="shape">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
+    //-------------------------the above is theme for rounded dialog-----------------------//
 </resources>
